@@ -1,0 +1,123 @@
+[
+	{
+		"guid": "3B892D24-FB3E-9296-2897-134D383B3EB9",
+		"name": "Hall Dawson",
+		"email": "viverra@ac.edu",
+		"section": "K",
+		"grade": 4,
+    "parents": [
+      {
+        "guid": "D484137A-1225-E3E2-84DD-9E5F7EF2C1EB",
+        "name": "Nissim Craft",
+        "email": "semper.egestas.urna@tinciduntadipiscing.ca",
+        "phone": "1-645-659-3332"
+      },
+      {
+        "guid": "71D3BC7C-16E4-D07A-DAF4-37B05E9373C9",
+        "name": "Carl Nicholson",
+        "email": "sed.auctor.odio@aliquetmetus.net",
+        "phone": "1-570-761-4178"
+      }
+    ]
+	},
+	{
+		"guid": "24C3B1E8-9728-87B8-8EF9-715B7B660060",
+		"name": "Alexander Nicholson",
+		"email": "a@turpisnecmauris.com",
+		"section": "E",
+		"grade": 2
+	},
+	{
+		"guid": "1FE52064-824B-B247-252D-360C3791E119",
+		"name": "Phillip Fernandez",
+		"email": "egestas.urna.justo@quisquepurus.edu",
+		"section": "H",
+		"grade": 5
+	},
+	{
+		"guid": "5CD880D6-5DBF-36E7-2BC6-B7665635A927",
+		"name": "Raja Park",
+		"email": "accumsan.neque@metusin.net",
+		"section": "P",
+		"grade": 3,
+    "parents": [
+	{
+      "guid": "CD49A175-0DB4-70BC-3983-2A749CC9B87C",
+      "name": "Alana Duffy",
+      "email": "penatibus.et@convallisin.co.uk",
+      "phone": "1-241-798-8156"
+    }
+	]
+	},
+	{
+		"guid": "72A3E5B2-4765-3D52-1BD1-FB1B3317C398",
+		"name": "Kalia Travis",
+		"email": "donec.est@eu.co.uk",
+		"section": "W",
+		"grade": 3
+	},
+  {
+		"guid": "D484137A-1225-E3E2-84DD-9E5F7EF2C1EB",
+		"name": "Nissim Craft",
+		"email": "semper.egestas.urna@tinciduntadipiscing.ca",
+		"section": null,
+		"grade": null
+	},
+  {
+		"guid": "517D348B-88D5-3546-7B55-B1935C925EEC",
+		"name": "Odysseus Moreno",
+		"email": "justo.proin@lobortis.co.uk",
+		"section": "L",
+		"grade": 5,
+    "parents": [
+      {
+        "guid": "8960EC60-D1CD-2666-0999-D33BC7655928",
+        "name": "Kennan Drake",
+        "email": "nullam.enim@nunclectus.edu",
+        "phone": "1-751-522-6064"
+      }
+    ]
+	},
+	{
+		"guid": "2F42247E-8A34-9186-BEE7-398E6BCFB22A",
+		"name": "Jarrod Avery",
+		"email": "facilisi@eratvitae.co.uk",
+		"section": "S",
+		"grade": 4
+	},
+	{
+		"guid": "E3AE736A-59D7-FEE7-8277-5C9E0429A6AA",
+		"name": "Kathleen Glover",
+		"email": "ut.nisi@sodalespurusin.net",
+		"section": "C",
+		"grade": 1
+	},
+	{
+		"guid": "E471D3C5-C1ED-207E-2DA6-902665C16AC1",
+		"name": "Fallon Logan",
+		"email": "posuere.vulputate.lacus@vitae.ca",
+		"section": "H",
+		"grade": 7
+	},
+	{
+		"guid": "6621CDE7-6307-18C6-762D-7DD3D71EC8B2",
+		"name": "Sandra Nunez",
+		"email": "erat.vivamus.nisi@ultricesvivamusrhoncus.edu",
+		"section": "C",
+		"grade": 5,
+    "parents": [
+      {
+        "guid": "52D40548-6773-D0DB-D1A8-E5B3D6F785EB",
+        "name": "Silas Ellison",
+        "email": "pede.cum.sociis@tellusidnunc.ca",
+        "phone": "1-417-556-3165"
+      },
+      {
+        "guid": "297C2C2C-BBB6-7093-916A-1E2B963EE95B",
+        "name": "Ulric Meadows",
+        "email": "at@uttinciduntorci.com",
+        "phone": "1-353-648-8701"
+      }
+    ]
+	}
+]

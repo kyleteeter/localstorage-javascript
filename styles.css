@@ -35,3 +35,17 @@ details[open] {
   grid-row: span 6;
   box-shadow: none;
 }
+
+[contenteditable="true"] {
+  padding: .25em .5em;
+  margin: 1em 0;
+  transition: padding .3s ease-in-out;
+  width: 100%;
+  background: #e0e0e0;
+  outline: 2px solid slategray;
+}
+
+[contenteditable="true"]:hover,
+[contenteditable="true"]:focus {
+  padding: .25em;
+}

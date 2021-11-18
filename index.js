@@ -17,29 +17,29 @@ function displayStudent(students) {
       }
     });
     this.root.innerHTML += renderSingleStudent(student, parents);
-    checkChange(student.guid)
   });
-  
 }
-function checkChange(guid){
-  document.getElementById(guid).addEventListener("input", function() {
-    console.log("input event fired");
-  }, false);
+function checkChange(guid) {
+  document.getElementById(guid).addEventListener(
+    "input",
+    function () {
+      console.log("input event fired");
+    },
+    false
+  );
 }
 
 function renderSingleStudent(student, parents) {
-  
+  // makeEditable(student)
   return `<details class="student" id="${
     student.guid
   }"><summary class="name"><span>${
     student.name
-  }</span></summary><p>Email: <span class="email" onclick="saveEdits(${student.name}email)">${
+  }</span></summary><p>Email: <span class="email">${
     student.email
   }</span></p><p>Section: <span class="section">${
     student.section
-  }</span></p><p>Grade: <span >${
-    student.grade
-  }</span></p><h3>${
+  }</span></p><p>Grade: <span>${student.grade}</span></p><h3>${
     parents.length ? "Parents" : "No parents registered"
   }</h3>${parents}<button onclick="makeEditable('${student.guid}')">Edit</button></details>`;
 }
@@ -63,33 +63,26 @@ function renderSingleParent(parent) {
 }
 
 function makeEditable(guid) {
-  let editBtn = document.getElementById(guid).getElementsByTagName('button');
-  let editables = document.getElementById(guid).getElementsByTagName('span')
-
-  console.log(typeof editables)
-    if (!editables[0].isContentEditable) {
-      Object.keys(editables).forEach((key) => {
-        editables[key].contentEditable = 'true';
-      });
-    } else {
-      Object.keys(editables).forEach((key) => {
-        editables[key].contentEditable = 'false';
-      });
-    }
-}
-
-
-
-function saveEdits(id) {
-  document.getElementById(id).addEventListener("input", function() {
-    console.log("input event fired");
-  }, false);
-}
-
-function checkEdits(person) {
-  // console.log('checkEdit', person)
-  if (localStorage.getItem(person.name) != null) {
-    document.getElementById(person).innerHTML = localStorage[person];
+  // console.log('orginal', student)
+  // console.log('type', student.guid)
+  let editBtn = document.getElementById(guid).querySelector("button");
+  let editables = document.getElementById(guid).getElementsByTagName("span");
+  if (!editables[0].isContentEditable) {
+    Object.keys(editables).forEach((key) => {
+      editables[key].contentEditable = "true";
+      editables[key].addEventListener(
+        "input",
+        function () {
+          console.log(editables[key].innerHTML)
+        },
+        false
+      );
+    });
+    editBtn.innerHTML = "Save Changes";
+  } else {
+    Object.keys(editables).forEach((key) => {
+      editables[key].contentEditable = "false";
+    });
+    editBtn.innerHTML = "Edit";
   }
 }
-

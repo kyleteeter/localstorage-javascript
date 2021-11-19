@@ -2,14 +2,15 @@ const root = document.getElementById("root");
 
 fetch("./students.json")
   .then((response) => response.json())
-  .then((response) =>
-    localStorage.setItem("students", JSON.stringify(response))
-  )
-  .then(displayStudent(localStorage.getItem("students")))
+  .then( response =>response.map(student => {
+      localStorage.setItem(student.guid, JSON.stringify(student));
+      displayStudent(student)
+    }))
+  // .then(displayStudent(localStorage.getItem("students")))
   .catch((err) => alert(err));
 
-function displayStudent(students) {
-  JSON.parse(students).forEach((student) => {
+function displayStudent(student) {
+  console.log(student)
     let parents = [];
     Object.keys(student).forEach((key) => {
       if (key === "parents") {
@@ -17,7 +18,6 @@ function displayStudent(students) {
       }
     });
     this.root.innerHTML += renderSingleStudent(student, parents);
-  });
 }
 function checkChange(guid) {
   document.getElementById(guid).addEventListener(
@@ -63,8 +63,6 @@ function renderSingleParent(parent) {
 }
 
 function makeEditable(guid) {
-  // console.log('orginal', student)
-  // console.log('type', student.guid)
   let editBtn = document.getElementById(guid).querySelector("button");
   let editables = document.getElementById(guid).getElementsByTagName("span");
   if (!editables[0].isContentEditable) {
@@ -74,6 +72,9 @@ function makeEditable(guid) {
         "input",
         function () {
           console.log(editables[key].innerHTML)
+          /*
+            locastorage.getItem(guid)
+          */
         },
         false
       );
@@ -86,3 +87,4 @@ function makeEditable(guid) {
     editBtn.innerHTML = "Edit";
   }
 }
+

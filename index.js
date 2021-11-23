@@ -4,8 +4,13 @@ fetch("./students.json")
   .then((response) => response.json())
   .then((response) =>
     response.map((student) => {
-      localStorage.setItem(student.guid, JSON.stringify(student));
-      displayStudent(student);
+      if (!localStorage.getItem(student.guid)) {
+        localStorage.setItem(student.guid, JSON.stringify(student));
+        displayStudent(student);
+      } else {
+        student = localStorage.getItem(student.guid);
+        displayStudent(JSON.parse(student));
+      }
     })
   )
   .catch((err) => alert(err));
@@ -38,7 +43,9 @@ function renderSingleStudent(student, parents) {
     student.email
   }</span></p><p>Section: <span class="section" data-type="section">${
     student.section
-  }</span></p><p>Grade: <span data-type="grade">${student.grade}</span></p><h3>${
+  }</span></p><p>Grade: <span data-type="grade">${
+    student.grade
+  }</span></p><h3>${
     parents.length ? "Parents" : "No parents registered"
   }</h3>${parents}<button onclick="makeEditable('${
     student.guid
@@ -64,32 +71,36 @@ function renderSingleParent(parent) {
 }
 
 function makeEditable(guid) {
+  let student = JSON.parse(localStorage.getItem(guid));
+  let keyName = "";
+  let editBtn = document.getElementById(guid).querySelector("button");
+  let editables = document.getElementById(guid).getElementsByTagName("span");
   for (var i = 0; i < localStorage.length; i++) {
-    // console.log(localStorage.getItem(localStorage.key(i)));
-
-    let editBtn = document.getElementById(guid).querySelector("button");
-    let editables = document.getElementById(guid).getElementsByTagName("span");
-    if (!editables[0].isContentEditable) {
-      Object.keys(editables).forEach((key) => {
+    Object.keys(editables).forEach((key) => {
+      if (!editables[key].isContentEditable) {
         editables[key].contentEditable = "true";
         editables[key].addEventListener(
           "input",
           function () {
-            let student = JSON.parse(localStorage.getItem(guid));
-            let keyName = editables[key].getAttribute('data-type')
+            keyName = editables[key].getAttribute("data-type");
             student[keyName] = editables[key].innerHTML;
+            console.log(JSON.stringify(student));
             localStorage.setItem(guid, JSON.stringify(student));
-
           },
           false
         );
-      });
-      editBtn.innerHTML = "Save Changes";
-    } else {
-      Object.keys(editables).forEach((key) => {
+        editBtn.innerHTML = "Save Changes";
+      } else {
         editables[key].contentEditable = "false";
-      });
-      editBtn.innerHTML = "Edit";
-    }
+        editBtn.innerHTML = "Edit";
+      }
+    });
   }
+  // console.log("student", student);
+  // saveChanges(guid, student)
 }
+
+function saveChanges(guid, student) {
+  localStorage.setItem(guid, student);
+}
+

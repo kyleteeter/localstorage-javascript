@@ -24,32 +24,23 @@ function displayStudent(student) {
   });
   this.root.innerHTML += renderSingleStudent(student, parents);
 }
-function checkChange(guid) {
-  document.getElementById(guid).addEventListener(
-    "input",
-    function () {
-      console.log("input event fired");
-    },
-    false
-  );
-}
 
 function renderSingleStudent(student, parents) {
-  return `<details class="student" id="${
+  return `<details class="student-card" id="${
     student.guid
-  }"><summary class="name"><span data-type="name">${
+  }"><summary class="student name"><span data-type="name">${
     student.name
-  }</span></summary><p>Email: <span class="email" data-type="email">${
+  }</span></summary><p>Email: <span class="student email" data-type="email">${
     student.email
-  }</span></p><p>Section: <span class="section" data-type="section">${
+  }</span></p><p>Section: <span class="student section" data-type="section">${
     student.section
-  }</span></p><p>Grade: <span data-type="grade">${
+  }</span></p><p>Grade: <span class="student grade" data-type="grade">${
     student.grade
-  }</span></p><h3>${
-    parents.length ? "Parents" : "No parents registered"
-  }</h3>${parents}<button onclick="makeEditable('${
+  }</span></p><button onclick="makeEditable('${
     student.guid
-  }')">Edit</button></details>`;
+  }', 'student')">Edit</button><h3>${
+    parents.length ? "Parents" : "No parents registered"
+  }</h3>${parents}</details>`;
 }
 
 function displayParent(parents) {
@@ -58,23 +49,23 @@ function displayParent(parents) {
     return [];
   } else if (parents.constructor.name === "Array") {
     parents.forEach((parent) => {
-      results += renderSingleParent(parent);
+      //localStorage.setItem(parent.guid, JSON.stringify(parent));
+      results += renderSingleParent(parent); 
     });
   } else {
+    //localStorage.setItem(parents.guid, JSON.stringify(parents));
     results += renderSingleParent(parents);
   }
   return results;
 }
 
 function renderSingleParent(parent) {
-  return `<details class="parent"><summary>${parent.name}</summary><p>Email: ${parent.email}</p><p>Phone: ${parent.phone}</p></details>`;
+  return `<details class="parent-card" id="${parent.guid}"><summary><span class="parent name" data-type="name">${parent.name}</span></summary><p>Email: <span class="parent email" data-type="email">${parent.email}</span></p><p>Phone: <span class="parent phone" data-type="phone">${parent.phone}</span></p> <button onclick="makeEditable('${parent.guid}', 'parent')">Edit</button></details>`;
 }
 
-function makeEditable(guid) {
-  let student = JSON.parse(localStorage.getItem(guid));
-  let keyName = "";
+function makeEditable(guid, cardClass) {
   let editBtn = document.getElementById(guid).querySelector("button");
-  let editables = document.getElementById(guid).getElementsByTagName("span");
+  let editables = document.getElementById(guid).getElementsByClassName(cardClass);
   for (var i = 0; i < localStorage.length; i++) {
     Object.keys(editables).forEach((key) => {
       if (!editables[key].isContentEditable) {
@@ -82,14 +73,15 @@ function makeEditable(guid) {
         editables[key].addEventListener(
           "input",
           function () {
-            keyName = editables[key].getAttribute("data-type");
-            student[keyName] = editables[key].innerHTML;
-            console.log(JSON.stringify(student));
-            localStorage.setItem(guid, JSON.stringify(student));
+            let person = localStorage.getItem(guid);
+            let keyName = editables[key].getAttribute("data-type");
+            person[keyName] = editables[key].innerHTML;
+            console.log('person', person)
+            localStorage.setItem(guid, JSON.stringify(person));
           },
           false
         );
-        editBtn.innerHTML = "Save Changes";
+        editBtn.innerHTML = "Done Editing";
       } else {
         editables[key].contentEditable = "false";
         editBtn.innerHTML = "Edit";
@@ -103,4 +95,3 @@ function makeEditable(guid) {
 function saveChanges(guid, student) {
   localStorage.setItem(guid, student);
 }
-

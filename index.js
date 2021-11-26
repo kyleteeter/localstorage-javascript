@@ -26,21 +26,7 @@ function displayStudent(student) {
 }
 
 function renderSingleStudent(student, parents) {
-  return `<details class="student-card" id="${
-    student.guid
-  }"><summary class="student name"><span data-type="name">${
-    student.name
-  }</span></summary><p>Email: <span class="student email" data-type="email">${
-    student.email
-  }</span></p><p>Section: <span class="student section" data-type="section">${
-    student.section
-  }</span></p><p>Grade: <span class="student grade" data-type="grade">${
-    student.grade
-  }</span></p><button onclick="makeEditable('${
-    student.guid
-  }', 'student')">Edit</button><h3>${
-    parents.length ? "Parents" : "No parents registered"
-  }</h3>${parents}</details>`;
+  return `<details class="student-card" id="${student.guid}"><summary><span class="student name" data-type="name">${student.name}</span></summary><p>Email: <span class="student email" data-type="email">${student.email}</span></p><p>Section: <span class="student section" data-type="section">${student.section}</span></p><p>Grade: <span class="student grade" data-type="grade">${student.grade}</span></p><button onclick="makeEditable('${student.guid}', 'student')">Edit</button><h3>${parents.length ? "Parents" : "No parents registered"}</h3>${parents}</details>`;
 }
 
 function displayParent(parents) {
@@ -73,10 +59,9 @@ function makeEditable(guid, cardClass) {
         editables[key].addEventListener(
           "input",
           function () {
-            let person = localStorage.getItem(guid);
+            let person = JSON.parse(localStorage.getItem(guid));
             let keyName = editables[key].getAttribute("data-type");
-            person[keyName] = editables[key].innerHTML;
-            console.log('person', person)
+            person[keyName] = editables[key].innerText;
             localStorage.setItem(guid, JSON.stringify(person));
           },
           false

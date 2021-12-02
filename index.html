@@ -7,8 +7,10 @@
     <title>Mentorship LocalStorage</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div id="root"></div>
+  <body onload="getGrades()">
+    <div id="root">
+      <select id="filterGrade"></select>
+    </div>
   </body>
   <script src="index.js"></script>
 </html>

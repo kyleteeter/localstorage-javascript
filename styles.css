@@ -1,5 +1,12 @@
+* {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 body {
-  background-color: #f7f7f7;
+  background-color: #02cd4d;
+}
+h1 {
+  margin-left: 15px;
+  color: white;
 }
 h3 {
   font-size: 16px;
@@ -10,8 +17,11 @@ h3 {
   grid-gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
   grid-auto-rows: 50px;
-  /* grid-auto-flow: column; */
   grid-gap: 20px;
+  background-color: white;
+  padding: 30px;
+  min-height: 80vh;
+  border-radius: 25px 25px 0px 0px;
 }
 
 .parent-card {
@@ -19,14 +29,31 @@ h3 {
 }
 
 .student-card {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.hide {
+  display: none;
 }
 
 details {
   color: #686868;
   padding: 5px;
   min-height: 50px;
+  font-size: 18px;
+  padding-left: 30px;
+}
+
+summary {
+  padding-top: 12px;
+}
+
+details.show {
+  display: block;
+}
+details.show details {
+  display: block;
 }
 
 details[open] {
@@ -37,9 +64,9 @@ details[open] {
 }
 
 [contenteditable="true"] {
-  padding: .25em .5em;
+  padding: 0.25em 0.5em;
   margin: 1em 0;
-  transition: padding .3s ease-in-out;
+  transition: padding 0.3s ease-in-out;
   width: 100%;
   background: #e0e0e0;
   outline: 2px solid slategray;
@@ -47,5 +74,27 @@ details[open] {
 
 [contenteditable="true"]:hover,
 [contenteditable="true"]:focus {
-  padding: .25em;
+  padding: 0.25em;
+}
+
+.filterTool {
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px;
+}
+select {
+  min-width: 200px;
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 5px;
+}
+button {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 18px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }

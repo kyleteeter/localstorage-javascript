@@ -1,4 +1,4 @@
-let getGradeElement = [];
+let getGradeElement = ["All"];
 const root = document.getElementById("root");
 
 fetch("./students.json")
@@ -27,8 +27,10 @@ function displayStudent(student) {
 }
 
 function renderSingleStudent(student, parents) {
-  getGradeElement.push(`${student.grade}`);
-  return `<details class="student-card" data-filter="${student.grade}" id="${
+  if (student.grade != null) {
+    getGradeElement.push(`${student.grade}`);
+  }
+  return `<details class="student-card ${student.grade} show" id="${
     student.guid
   }"><summary><span class="student name" data-type="name">${
     student.name
@@ -72,7 +74,6 @@ function makeEditable(guid, cardClass, studentID) {
   let editables = document
     .getElementById(guid)
     .getElementsByClassName(cardClass);
-  console.log("editable", editables);
   Object.keys(editables).forEach((key) => {
     if (!editables[key].isContentEditable) {
       editables[key].contentEditable = "true";
@@ -105,19 +106,17 @@ function findParent(studentID, parentGuid) {
 function getGrades() {
   let grades = removeDuplicates(getGradeElement);
   var selectElem = document.getElementById("filterGrade");
-
   for (var i = 0; i < grades.length; i++) {
     var element = document.createElement("option");
     element.innerText = grades[i];
     selectElem.append(element);
   }
-
-  let selector = document.getElementById("filterGrade").value;
-  console.log(document.querySelectorAll(`[data-filter='${selector}']`));
 }
 
 function removeDuplicates(getGradeElement) {
-  getGradeElement.sort();
+  getGradeElement.sort(function (a, b) {
+    return b - a;
+  });
   let uniqueValues = [];
   getGradeElement.forEach((element) => {
     if (!uniqueValues.includes(element)) {
@@ -125,4 +124,23 @@ function removeDuplicates(getGradeElement) {
     }
   });
   return uniqueValues;
+}
+
+function showCard() {
+  let selector = document.getElementById("filterGrade").value;
+  let allCards = document.getElementsByClassName("student-card");
+  for (var i = 0; i < allCards.length; i++) {
+    if (selector === "All") {
+      allCards[i].classList.replace("hide", "show");
+    } else if (allCards[i].classList.contains(`${selector}`)) {
+      allCards[i].classList.replace("hide", "show");
+    } else {
+      allCards[i].classList.replace("show", "hide");
+    }
+  }
+}
+
+function reset() {
+  document.getElementById("filterGrade").value = "All";
+  document.getElementById("filterGrade").dispatchEvent(new Event("change"));
 }
